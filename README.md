@@ -1,5 +1,7 @@
 # Christmas miniature
 
+   [Christmas miniature preview](https://christmas-mininature-fazlizekiqi.netlify.app/)
+
 A small Christmas miniature developed with
 * Three.JS
 * Blender
