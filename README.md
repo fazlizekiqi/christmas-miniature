@@ -5,7 +5,7 @@ A small Christmas miniature developed with
 * Blender
 * Webpack
 
-![Christmas miniature](christimas-mininature-mov.gif)
+![Christmas miniature](christimas-miniature-mov.gif)
 
 
 ## Run the application
