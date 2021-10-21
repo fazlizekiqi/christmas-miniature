@@ -20,9 +20,6 @@ gui.addColor(backgroundColor, 'color')
 const loader = new GLTFLoader();
 loader.load('models/winter-house.glb', (wh) => {
     const pl = new THREE.PointLight('#ff7d46', 5, 4.5)
-    gui.add(pl.position, 'x').min(-20).max(20).step(0.001)
-    gui.add(pl.position, 'y').min(-20).max(20).step(0.001)
-    gui.add(pl.position, 'z').min(-20).max(20).step(0.001)
     pl.position.set(-1, 2, -2.3)
     scene.add(pl)
     wh.scene.scale.setX(0.75)
