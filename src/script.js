@@ -4,7 +4,8 @@ import { Trees } from "./objects/Trees";
 import { WinterHouse } from "./objects/WinterHouse";
 import { SnowFlakes } from "./objects/SnowFlakes";
 import { SnowGround } from "./objects/SnowGround";
-import { ambientLight, pointLight, camera, sizes, renderer, controls } from "./utils";
+import { ambientLight, camera, controls, pointLight, renderer, sizes } from "./utils";
+import Resources from "./Resources";
 
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x161616);
@@ -13,15 +14,35 @@ scene.add(ambientLight);
 scene.add(pointLight);
 scene.add(camera)
 
-WinterHouse(scene);
-Trees(scene);
-SnowGround(scene);
-const snowFlakes = SnowFlakes(scene)
+
+const resources = new Resources();
+// Update area
+resources.on('progress', (_progress) => {
+  console.log("Progress: " + _progress)
+})
+
+
+let snowFlakes;
+
+// Ready
+resources.on('ready', () => {
+  window.requestAnimationFrame(() => {
+    console.log('Materials ready')
+
+    SnowGround(scene, resources.items);
+    Trees(scene, resources.items);
+    snowFlakes = SnowFlakes(scene, resources.items)
+    WinterHouse(scene,resources.items.winterHouse);
+  })
+})
+
 
 const render = () => {
 
-  snowFlakes.updateSnowFlakes();
-  snowFlakes.snowFlakeGeometry.attributes.position.needsUpdate = true
+  if(snowFlakes) {
+    snowFlakes.updateSnowFlakes();
+    snowFlakes.snowFlakeGeometry.attributes.position.needsUpdate = true
+  }
 
   controls.maxPolarAngle = (Math.PI / 2) - 0.05;
   controls.update()

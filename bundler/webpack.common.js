@@ -56,7 +56,7 @@ module.exports = {
 
           // Images
           {
-            test: /\.(jpg|png|gif|svg)$/,
+            test: /\.(jpg|jpeg|png|gif|svg)$/,
             use:
               [
                 {
@@ -82,7 +82,20 @@ module.exports = {
                     }
                 }
               ]
-          }
+          },
+          {
+            test: /\.(glb|gltf|fbx|bin|obj)$/,
+            use:
+              [
+                {
+                  loader: 'file-loader',
+                  options:
+                    {
+                      outputPath: 'assets/models/'
+                    }
+                }
+              ]
+          },
         ]
     }
 }

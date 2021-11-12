@@ -1,13 +1,11 @@
 import * as THREE from "three";
 
 const totalSnowFlakes = 1000;
-const textureLoader = new THREE.TextureLoader();
-const snowflakeTexture = textureLoader.load('textures/snowflake2.png');
 const snowFlakeGeometry = new THREE.BufferGeometry();
 const snowFlakePositionArray = new Float32Array(totalSnowFlakes * 3);
 const positionAttribute = new THREE.BufferAttribute(snowFlakePositionArray, 3);
 
-const updateSnowFlakes = ( ) => {
+const updateSnowFlakes = (items) => {
   let snowFlakeSpeed = 0.015;
   for (let i = 0; i < totalSnowFlakes; i++) {
     const i3 = i * 3;
@@ -18,7 +16,7 @@ const updateSnowFlakes = ( ) => {
   }
 };
 
-export const SnowFlakes = (scene) => {
+export const SnowFlakes = (scene, items) => {
 
   snowFlakeGeometry.setAttribute('position', positionAttribute);
 
@@ -26,10 +24,11 @@ export const SnowFlakes = (scene) => {
     snowFlakePositionArray[i] = 13.5 * Math.sin(Math.random() - 0.5);
   }
 
+
   const snowFlakeMaterial = new THREE.PointsMaterial({
     size: 0.15,
     color: 0xffffff,
-    map: snowflakeTexture,
+    map: items.snowFlakeTexture,
     vertexColors: false,
     blending: THREE.AdditiveBlending,
     transparent: true,
@@ -38,7 +37,7 @@ export const SnowFlakes = (scene) => {
     depthWrite: false
   })
 
-  const snowFlakePoint = new THREE.Points(snowFlakeGeometry, snowFlakeMaterial,);
+  const snowFlakePoint = new THREE.Points(snowFlakeGeometry, snowFlakeMaterial);
   scene.add(snowFlakePoint);
 
   return {updateSnowFlakes, snowFlakeGeometry};

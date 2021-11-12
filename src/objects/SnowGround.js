@@ -1,27 +1,19 @@
 import * as THREE from "three";
 
-const textureLoader = new THREE.TextureLoader();
 const radius = 7.5;
 const radialSegments = 240;
 
-export const SnowGround = (scene) =>{
-
-  const hemiSphereColorTexture = textureLoader.load('/textures/snow-ground/color.jpeg');
-  const hemiSphereAmbientOcclusionTexture = textureLoader.load('/textures/snow-ground/ambientOcclusion.jpeg');
-  const hemiSphereHeightTexture = textureLoader.load('/textures/snow-ground/height.jpeg');
-  const hemiSphereNormalTexture = textureLoader.load('/textures/snow-ground/normal.jpeg');
-  const hemiSphereMetalnessTexture = textureLoader.load('/textures/snow-ground/metalness.jpeg');
-  const hemiSphereRoughnessTexture = textureLoader.load('/textures/snow-ground/roughness.jpeg');
+export const SnowGround = (scene, textures) => {
 
   const hemisphereMaterial = new THREE.MeshStandardMaterial({
     transparent: true,
-    map: hemiSphereColorTexture,
-    aoMap: hemiSphereAmbientOcclusionTexture,
-    displacementMap: hemiSphereHeightTexture,
+    map: textures.hemisphereColorTexture,
+    aoMap: textures.hemisphereAmbientOcclusionTexture,
+    displacementMap: textures.hemiSphereHeightTexture,
     displacementScale: 0.01,
-    normalMap: hemiSphereNormalTexture,
-    metalnessMap: hemiSphereMetalnessTexture,
-    roughnessMap: hemiSphereRoughnessTexture,
+    normalMap: textures.hemiSphereNormalTexture,
+    metalnessMap: textures.hemiSphereMetalnessTexture,
+    roughnessMap: textures.hemiSphereRoughnessTexture,
   });
 
 
@@ -42,11 +34,11 @@ export const SnowGround = (scene) =>{
 
   const snowGroundMaterial = new THREE.MeshStandardMaterial({
     transparent: true,
-    map: hemiSphereColorTexture,
-    aoMap: hemiSphereAmbientOcclusionTexture,
+    map: textures.hemisphereColorTexture,
+    aoMap: textures.hemisphereAmbientOcclusionTexture,
     displacementScale: 0.9,
-    normalMap: hemiSphereNormalTexture,
-    roughnessMap: hemiSphereRoughnessTexture,
+    normalMap: textures.hemiSphereNormalTexture,
+    roughnessMap: textures.hemiSphereRoughnessTexture,
   });
 
   const snowGround = new THREE.Mesh(snowGroundGeometry, snowGroundMaterial);
